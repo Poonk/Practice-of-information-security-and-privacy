@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{{ title or "Vuln Microblog" }}</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; max-width: 900px; margin: 24px auto; padding: 0 12px; }
+    nav a { margin-right: 10px; }
+    .muted { color: #666; }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 12px; margin: 12px 0; }
+    .danger { color: #b00020; }
+    input[type=text], input[type=password], textarea { width: 100%; padding: 8px; }
+    textarea { height: 140px; }
+    .row { display: flex; gap: 12px; }
+    .row > div { flex: 1; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('index') }}">Home</a>
+    {% if current_user %}
+      <span class="muted">Logged in as <b>{{ current_user.username }}</b> ({{ current_user.role }})</span>
+      <a href="{{ url_for('new_post') }}">New Post</a>
+      <a href="{{ url_for('export_my_data') }}">Export</a>
+      <a href="{{ url_for('admin_logs') }}">Admin Logs</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+      <a href="{{ url_for('register') }}">Register</a>
+      <a href="{{ url_for('login') }}">Login</a>
+    {% endif %}
+  </nav>
+  <hr>
+  {% block content %}{% endblock %}
+</body>
+</html>

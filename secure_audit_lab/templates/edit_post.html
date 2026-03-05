@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit Post #{{ post.id }}</h2>
+<form method="post">
+  <label>Title</label>
+  <input type="text" name="title" value="{{ post.title }}"/>
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Content</label>
+  <textarea name="content">{{ post.content }}</textarea>
+  <label><input type="checkbox" name="is_private" {% if post.is_private %}checked{% endif %}/> Private</label>
+  <button type="submit">Save</button>
+</form>
+{% endblock %}

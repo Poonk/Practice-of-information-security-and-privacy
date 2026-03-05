@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="muted">#{{ post.id }} · owner_id={{ post.owner_id }} · {{ post.created_at }} {% if post.is_private %}· <b class="danger">PRIVATE</b>{% endif %}</div>
+  <h2>{{ post.title }}</h2>
+  <div>{{ post.content }}</div>
+</div>
+
+<h3>Comments</h3>
+{% for c in comments %}
+  <div class="card">
+    <div class="muted">{{ c.author }} · {{ c.created_at }}</div>
+    <div>{{ c.body }}</div>
+  </div>
+{% endfor %}
+
+{% if current_user %}
+<form method="post">
+  <label>Add comment</label>
+  <input type="text" name="body" placeholder="Nice post!"/>
+  <button type="submit">Comment</button>
+</form>
+{% else %}
+<p class="muted">Login to comment.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Microblog</h2>
+
+<form method="get" action="{{ url_for('index') }}">
+  <div class="row">
+    <div>
+      <input type="text" name="q" value="{{ q }}" placeholder="Search posts by title (vulnerable)"/>
+    </div>
+    <div style="flex:0">
+      <button type="submit">Search</button>
+    </div>
+  </div>
+</form>
+
+{% for p in posts %}
+  <div class="card">
+    <div class="muted">#{{ p.id }} · owner_id={{ p.owner_id }} · {{ p.created_at }} {% if p.is_private %}· <b class="danger">PRIVATE</b>{% endif %}</div>
+    <h3><a href="{{ url_for('view_post', post_id=p.id) }}">{{ p.title }}</a></h3>
+    <div>{{ p.content }}</div>
+    {% if current_user %}
+      <div style="margin-top:10px">
+        <a href="{{ url_for('edit_post', post_id=p.id) }}">Edit</a>
+        <form method="post" action="{{ url_for('delete_post', post_id=p.id) }}" style="display:inline">
+          <button type="submit">Delete</button>
+        </form>
+      </div>
+    {% endif %}
+  </div>
+{% endfor %}
+
+{% if not posts %}
+  <p class="muted">No posts yet.</p>
+{% endif %}
+
+{% endblock %}

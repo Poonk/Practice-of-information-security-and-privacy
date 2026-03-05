@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Export</h2>
+<p class="muted">Export written to: <code>{{ out_path }}</code></p>
+<pre class="card">{{ json_text }}</pre>
+{% endblock %}
