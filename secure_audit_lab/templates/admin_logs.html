@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin Logs</h2>
+<p class="muted">This page is intended for admins (but audit it!).</p>
+
+<table>
+  <thead>
+    <tr><th>ID</th><th>Event</th><th>Detail</th><th>Time</th></tr>
+  </thead>
+  <tbody>
+  {% for L in logs %}
+    <tr>
+      <td>{{ L.id }}</td>
+      <td>{{ L.event }}</td>
+      <td><code>{{ L.detail }}</code></td>
+      <td class="muted">{{ L.created_at }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

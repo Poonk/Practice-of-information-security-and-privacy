@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>New Post</h2>
+{% if error %}<p class="danger"><b>Error:</b> {{ error }}</p>{% endif %}
+<form method="post">
+  <label>Title</label>
+  <input type="text" name="title" placeholder="Hello"/>
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Content</label>
+  <textarea name="content" placeholder="Write something..."></textarea>
+  <label><input type="checkbox" name="is_private"/> Private</label>
+  <button type="submit">Publish</button>
+</form>
+{% endblock %}
